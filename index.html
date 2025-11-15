@@ -226,30 +226,84 @@
     <button id="loadSheet">Carregar</button>
   </div>
 
-  <script>
-    async function loadFromURL(url){
-      try{
-        const response = await fetch(url);
-        const text = await response.text();
-        const rows = text.split(/
-?
-/).map(r=>r.split(","));
-        rows.forEach(r=>{
-          if(r.length>=2 && r[0].trim()!==""){
-            addMusic(r[0], r[1]);
-          }
-        });
-        alert("Planilha carregada com sucesso!");
-      }catch(err){
-        alert("Erro ao carregar: "+ err.message);
-      }
+<script>
+  // Conversor: link normal → link CSV
+  function toCSVUrl(url) {
+    // se já for CSV, usa direto
+    if (url.includes("output=csv")) return url;
+
+    // se for link compartilhado normal
+    // exemplo: https://docs.google.com/spreadsheets/d/ID/edit?usp=sharing
+    const match = url.match(/\/d\/([^\/]+)/);
+    if (match) {
+      const id = match[1];
+      return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv`;
     }
 
-    document.getElementById("loadSheet").onclick = ()=>{
-      const url = document.getElementById("sheetUrl").value.trim();
-      if(!url){ alert("Cole um link primeiro!"); return; }
-      loadFromURL(url);
-    };
-  </script>
+    return url; // fallback
+  }
+
+  async function loadFromURL(url) {
+    try {
+      const csvUrl = toCSVUrl(url);
+      const response = await fetch(csvUrl);
+
+      if (!response.ok) throw new Error("Falha ao baixar CSV");
+
+      const text = await response.text();
+
+      // Divide linhas
+      const lines = text.trim().split(/\r?\n/);
+
+      // Remove cabeçalho
+      const dataLines = lines.slice(1);
+
+      let count = 0;
+
+      dataLines.forEach(line => {
+        const parts = line.split(",");
+
+        // Ajuste para vírgulas dentro de aspas
+        const clean = parts.map(x => x.replace(/^"|"$/g, ""));
+
+        const musica   = clean[0] || "";
+        const versao   = clean[1] || "";
+        const pont     = clean[2] || "";
+        const estrelas = clean[3] || "";
+        const jogo     = clean[4] || "";
+
+        if (!musica.trim()) return;
+
+        dados.push({
+          musica,
+          versao,
+          pontuacao: pont,
+          estrelas,
+          jogo
+        });
+
+        count++;
+      });
+
+      save();
+      render();
+
+      alert(`Planilha carregada! Foram adicionadas ${count} músicas.`);
+
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao carregar: " + err.message);
+    }
+  }
+
+  document.getElementById("loadSheet").onclick = () => {
+    const url = document.getElementById("sheetUrl").value.trim();
+    if (!url) {
+      alert("Cole um link primeiro!");
+      return;
+    }
+    loadFromURL(url);
+  };
+</script>
 </body>
 </html>
