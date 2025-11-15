@@ -225,17 +225,17 @@
     <input id="sheetUrl" type="text" placeholder="Cole aqui o link da planilha CSV ou Google Sheets (CSV)">
     <button id="loadSheet">Carregar</button>
   </div>
-
-<script>
+  <script>
   async function loadFromURL(url){
     try{
       const response = await fetch(url);
       const text = await response.text();
 
-      // Quebra por linha e por vírgula
+      console.log("RAW RESPONSE RECEBIDO:");
+      console.log(text); // <<< DEBUG PRA VER SE É CSV
+
       const rows = text.split(/\r?\n/).map(r => r.split(","));
 
-      // Para cada linha, pega Música e Versão (coluna 1 e 2)
       rows.forEach(r=>{
         if(r.length >= 1 && r[0].trim() !== ""){
           const item = {
@@ -251,7 +251,7 @@
 
       save();
       render();
-      alert("Planilha carregada com sucesso!");
+      alert("Planilha carregada!");
     }catch(err){
       alert("Erro ao carregar: " + err.message);
       console.error(err);
