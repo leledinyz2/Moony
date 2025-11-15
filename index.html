@@ -73,7 +73,7 @@
 
       <table id="tabela">
         <thead>
-          <tr><th>Música</th><th>Versão</th><th>Pontuação</th><th>Estrelas</th><th>Jogo</th><th></th></tr>
+          <tr><th>Música</th><th>Versão</th><th>Pontuação</th><th>Estrelas</th><th></th></tr>
         </thead>
         <tbody id="tbody">
           <tr class="empty"><td colspan="6">Nenhuma música adicionada. Use o formulário acima para criar sua ficha.</td></tr>
@@ -116,7 +116,6 @@
           <td>${escapeHtml(item.versao||'')}</td>
           <td>${escapeHtml(item.pontuacao||'')}</td>
           <td>${escapeHtml(item.estrelas||'')}</td>
-          <td>${escapeHtml(item.jogo||'')}</td>
           <td style="text-align:right">
             <button class="btn small ghost" data-idx="${idx}" data-action="edit">Editar</button>
             <button class="btn small ghost" data-idx="${idx}" data-action="del">Excluir</button>
@@ -167,7 +166,7 @@
 
     // export CSV
     function toCSV(arr){
-      if(!arr.length) return ''; const headers = ['Música','Versão','Pontuação','Estrelas','Jogo'];
+      if(!arr.length) return ''; const headers = ['Música','Versão','Pontuação','Estrelas'];
       const esc = v => '"'+String(v||'').replace(/"/g,'""')+'"';
       const lines = [headers.map(esc).join(',')];
       arr.forEach(r=> lines.push([r.musica,r.versao,r.pontuacao,r.estrelas,r.jogo].map(esc).join(',')));
