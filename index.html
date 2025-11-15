@@ -47,7 +47,6 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <input id="inputJogo" placeholder="Jogo (ex: Just Dance 2017)" style="width:160px">
 
         <div class="controls">
           <button type="submit" class="btn">Adicionar</button>
@@ -135,12 +134,11 @@
       const musica = inputMusica.value.trim();
       if(!musica) return alert('Coloca o nome da música!');
       const item = {
-        musica,
-        versao: inputVersao.value.trim(),
-        pontuacao: inputPontuacao.value? Number(inputPontuacao.value): '',
-        estrelas: inputEstrelas.value || '',
-        jogo: inputJogo.value.trim()
-      };
+  musica: musicaInput.value,
+  versao: versaoInput.value,
+  pontuacao: Number(pontuacaoInput.value),
+  estrelas: estrelasInput.value
+};
       dados.push(item); save(); render(); form.reset(); inputMusica.focus();
     });
 
@@ -249,11 +247,10 @@ async function loadFromURL(url){
 
     rows.forEach(r=>{
       const item = {
-        musica: r[0] ? r[0].trim() : "",
-        versao: r[1] ? r[1].trim() : "",
-        pontuacao: r[2] ? Number(r[2].trim()) : "",
-        estrelas: r[3] ? r[3].trim() : "",
-        jogo: r[4] ? r[4].trim() : ""
+  musica: r[0] ? r[0].trim() : "",
+  versao: r[1] ? r[1].trim() : "",
+  pontuacao: r[2] ? Number(r[2].trim()) : "",
+  estrelas: r[3] ? r[3].trim() : ""
       };
 
       if(item.musica !== ""){
