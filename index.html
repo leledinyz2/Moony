@@ -174,8 +174,7 @@
       const esc = v => '"'+String(v||'').replace(/"/g,'""')+'"';
       const lines = [headers.map(esc).join(',')];
       arr.forEach(r=> lines.push([r.musica,r.versao,r.pontuacao,r.estrelas,r.jogo].map(esc).join(',')));
-      return lines.join('
-');
+      return lines.join('\n');
     }
     exportCsvBtn.addEventListener('click', ()=>{
       const csv = toCSV(dados);
@@ -226,46 +225,48 @@
     <button id="loadSheet">Carregar</button>
   </div>
   <script>
-  async function loadFromURL(url){
-    try{
-      const response = await fetch(url);
-      const text = await response.text();
+// ----- IMPORTAR VIA PLANILHA (agora usando "dados" corretamente) -----
 
-      console.log("RAW RESPONSE RECEBIDO:");
-      console.log(text); // <<< DEBUG PRA VER SE É CSV
+async function loadFromURL(url){
+  try{
+    const response = await fetch(url);
+    const text = await response.text();
 
-      const rows = text.split(/\r?\n/).map(r => r.split(","));
+    console.log("CSV recebido:", text);
 
-      rows.forEach(r=>{
-        if(r.length >= 1 && r[0].trim() !== ""){
-          const item = {
-            musica: r[0].trim(),
-            versao: r[1] ? r[1].trim() : "",
-            pontuacao: "",
-            estrelas: "",
-            jogo: ""
-          };
-          dados.push(item);
-        }
-      });
+    const rows = text.split(/\r?\n/).map(r => r.split(","));
 
-      save();
-      render();
-      alert("Planilha carregada!");
-    }catch(err){
-      alert("Erro ao carregar: " + err.message);
-      console.error(err);
-    }
+    rows.forEach(r=>{
+      if(r.length >= 1 && r[0].trim() !== ""){
+        const item = {
+          musica: r[0].trim(),
+          versao: r[1] ? r[1].trim() : "",
+          pontuacao: "",
+          estrelas: "",
+          jogo: ""
+        };
+        dados.push(item);
+      }
+    });
+
+    save();
+    render();
+    alert("Planilha carregada!");
+    
+  }catch(err){
+    alert("Erro ao carregar: " + err.message);
+    console.error(err);
   }
+}
 
-  document.getElementById("loadSheet").onclick = ()=>{
-    const url = document.getElementById("sheetUrl").value.trim();
-    if(!url){
-      alert("Cole um link primeiro!");
-      return;
-    }
-    loadFromURL(url);
-  };
+document.getElementById("loadSheet").onclick = ()=>{
+  const url = document.getElementById("sheetUrl").value.trim();
+  if(!url){
+    alert("Cole um link primeiro!");
+    return;
+  }
+  loadFromURL(url);
+};
 </script>
 </body>
 </html>
