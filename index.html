@@ -1,99 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lele — Site Pessoal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lele • Home</title>
 
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --subtext: #444444;
-      --card: #f4f4f4;
-      --accent: #3b6cff;
-    }
+    <style>
+        :root {
+            --bg: #d8c4a8; /* bege elegante */
+            --roxo1: #9f7bff;
+            --roxo2: #7d5fff;
+            --texto: #222;
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0e1116;
-        --text: #f6f6f6;
-        --subtext: #b9b9b9;
-        --card: #161b22;
-        --accent: #6d8cff;
-      }
-    }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0e0e0e;
+                --texto: #e9e9e9;
+            }
+        }
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
-    }
+        body {
+            margin: 0;
+            background: var(--bg);
+            font-family: "Inter", Arial, sans-serif;
+            color: var(--texto);
+        }
 
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 25px;
+        }
 
-    p {
-      color: var(--subtext);
-      font-size: 18px;
-      margin-top: 0;
-      margin-bottom: 40px;
-    }
+        .card {
+            background: #fff3;
+            backdrop-filter: blur(4px);
+            padding: 35px 25px;
+            border-radius: 28px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
 
-    .btns {
-      display: flex;
-      gap: 16px;
-    }
+        @media (prefers-color-scheme: dark) {
+            .card {
+                background: #ffffff0d;
+            }
+        }
 
-    a.button {
-      padding: 12px 26px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--bg);
-      background: var(--text);
-      transition: 0.2s;
-    }
+        /* Formas abstratas roxas (igual vibe do exemplo) */
+        .shape1 {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: var(--roxo1);
+            border-radius: 50%;
+            top: -120px;
+            right: -100px;
+        }
 
-    a.button:hover {
-      opacity: 0.8;
-      transform: translateY(-2px);
-    }
+        .shape2 {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            background: var(--roxo2);
+            border-radius: 50%;
+            bottom: -120px;
+            left: -90px;
+        }
 
-    .card {
-      margin-top: 60px;
-      max-width: 700px;
-      padding: 20px;
-      background: var(--card);
-      border-radius: 14px;
-      color: var(--subtext);
-      font-size: 15px;
-    }
-  </style>
+        /* Avatar */
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff5;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            margin: 20px 0 10px;
+            font-size: 2.3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        p {
+            font-size: 1.1rem;
+            opacity: .85;
+            position: relative;
+            z-index: 2;
+        }
+
+        a.btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 22px;
+            border-radius: 20px;
+            background: var(--roxo2);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 2;
+        }
+
+        a.btn:hover {
+            opacity: .8;
+        }
+    </style>
 </head>
-
 <body>
 
-  <h1>Lele</h1>
-  <p>Meu cantinho na internet, simples e organizado.</p>
+    <div class="container">
+        <div class="card">
+            <div class="shape1"></div>
+            <div class="shape2"></div>
 
-  <div class="btns">
-    <a class="button" href="projetos.html">Projetos</a>
-    <a class="button" href="sobre.html">Sobre mim</a>
-  </div>
+            <!-- Foto/avatar -->
+            <img src="avatar.jpg" alt="Avatar" class="avatar">
 
-  <div class="card">
-    Página inicial minimalista automática: ela muda entre claro e escuro seguindo o tema do seu PC.
-  </div>
+            <!-- Seu nome -->
+            <h1>Lele</h1>
+
+            <!-- Subtexto (bem minimalista) -->
+            <p>Bem-vindo ao meu espaço pessoal.</p>
+
+            <!-- Botão pra Sobre -->
+            <a class="btn" href="sobre.html">Sobre mim</a>
+        </div>
+    </div>
 
 </body>
 </html>
