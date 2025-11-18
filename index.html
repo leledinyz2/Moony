@@ -3,138 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lele • Home</title>
+    <title>Lele • Portfólio</title>
 
     <style>
         :root {
-            --bg: #d8c4a8; /* bege elegante */
+            --bg: #d8c4a8;
             --roxo1: #9f7bff;
             --roxo2: #7d5fff;
             --texto: #222;
+            --card: #ffffffbb;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #0e0e0e;
-                --texto: #e9e9e9;
+                --texto: #eeeeee;
+                --card: #ffffff12;
             }
         }
 
         body {
             margin: 0;
             background: var(--bg);
-            font-family: "Inter", Arial, sans-serif;
             color: var(--texto);
+            font-family: "Inter", Arial, sans-serif;
         }
 
-        .container {
-            max-width: 430px;
+        /* NAVBAR */
+        nav {
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: var(--texto);
+            text-decoration: none;
+            margin-left: 20px;
+            opacity: .85;
+        }
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* HERO */
+        .hero {
+            max-width: 1000px;
+            margin: 60px auto 40px;
             padding: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
         }
 
-        .card {
-            background: #fff3;
-            backdrop-filter: blur(4px);
-            padding: 35px 25px;
-            border-radius: 28px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .card {
-                background: #ffffff0d;
-            }
-        }
-
-        /* Formas abstratas roxas (igual vibe do exemplo) */
-        .shape1 {
-            position: absolute;
-            width: 280px;
-            height: 280px;
-            background: var(--roxo1);
-            border-radius: 50%;
-            top: -120px;
-            right: -100px;
-        }
-
-        .shape2 {
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            background: var(--roxo2);
-            border-radius: 50%;
-            bottom: -120px;
-            left: -90px;
-        }
-
-        /* Avatar */
+        /* Foto */
         .avatar {
-            width: 110px;
-            height: 110px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #fff5;
-            margin-top: 10px;
-            position: relative;
-            z-index: 2;
+            border: 4px solid #ffffff33;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 250px;
         }
 
         h1 {
-            margin: 20px 0 10px;
-            font-size: 2.3rem;
-            position: relative;
-            z-index: 2;
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
         }
 
-        p {
-            font-size: 1.1rem;
+        p.sub {
+            margin: 10px 0 20px;
+            font-size: 1.2rem;
             opacity: .85;
-            position: relative;
-            z-index: 2;
         }
 
         a.btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 22px;
-            border-radius: 20px;
             background: var(--roxo2);
             color: white;
+            padding: 12px 20px;
+            border-radius: 18px;
             text-decoration: none;
             font-weight: 600;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 2;
+            letter-spacing: 0.2px;
         }
-
         a.btn:hover {
             opacity: .8;
+        }
+
+        /* Section título */
+        .section-title {
+            max-width: 1000px;
+            margin: 60px auto 15px;
+            padding: 0 25px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            opacity: .9;
+        }
+
+        /* Cards de projetos */
+        .projects {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 25px;
+            display: grid;
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(6px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            margin: 10px 0 15px;
+            font-size: 0.98rem;
+            opacity: .8;
+        }
+
+        .card a {
+            color: var(--roxo2);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .card a:hover {
+            opacity: .75;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="card">
-            <div class="shape1"></div>
-            <div class="shape2"></div>
-
-            <!-- Foto/avatar -->
-            <img src="avatar.jpg" alt="Avatar" class="avatar">
-
-            <!-- Seu nome -->
-            <h1>Lele</h1>
-
-            <!-- Subtexto (bem minimalista) -->
-            <p>Bem-vindo ao meu espaço pessoal.</p>
-
-            <!-- Botão pra Sobre -->
-            <a class="btn" href="sobre.html">Sobre mim</a>
+    <nav>
+        <div style="font-size: 1.3rem;">Lele</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="projetos.html">Projetos</a>
         </div>
-    </div>
+    </nav>
+
+    <section class="hero">
+        <img src="avatar.jpg" alt="Foto de Lele" class="avatar">
+
+        <div class="hero-text">
+            <h1>Oi, eu sou o Lele</h1>
+            <p class="sub">Criador, jogador e explorador de ideias. Este é meu portfólio pessoal.</p>
+            <a href="projetos.html" class="btn">Ver projetos</a>
+        </div>
+    </section>
+
+    <div class="section-title">Destaques</div>
+
+    <section class="projects">
+        <div class="card">
+            <h3>NY Scores</h3>
+            <p>Ferramenta que criei para organizar e calcular pontuações de forma rápida e bonita.</p>
+            <a href="#">Ver projeto</a>
+        </div>
+
+        <div class="card">
+            <h3>Em breve…</h3>
+            <p>Novo projeto sendo preparado. Vai ficar bem bonito.</p>
+            <a href="#">Acompanhar</a>
+        </div>
+    </section>
 
 </body>
 </html>
